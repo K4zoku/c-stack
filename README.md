@@ -37,7 +37,7 @@ int main(int argc, char ** argv) {
         cstack_push(rev, str[i]);
     }
 
-    printf("size: %u\n", cstack_size(rev));
+    printf("size: %lu\n", cstack_size(rev));
 
     while (!cstack_empty(rev)) {
         putchar(cstack_top(rev));
