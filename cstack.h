@@ -64,7 +64,7 @@
     do {                                                                                                               \
         if (cstack_empty(st)) break;                                                                                   \
         cstack_set_size(st, cstack_size(st) - 1);                                                                      \
-        cstack_shrink(st);                                                                                        \
+        cstack_shrink(st);                                                                                             \
     } while (0)
 
 /**
