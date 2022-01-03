@@ -1,3 +1,5 @@
+name: Make
+
 on:
   push:
     branches: [ master ]
