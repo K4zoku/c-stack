@@ -59,11 +59,11 @@ cstack.h
 .br
 .RI "For internal use, sets the capacity variable of the stack\&. "
 .ti -1c
-.RI "#define \fBcstack_grow\fP(st)       \fBcstack_alloc\fP(st, \fBcstack_capacity\fP(st) + 1)"
+.RI "#define \fBcstack_grow\fP(st)"
 .br
 .RI "For internal use, ensures that the stack is enough room for new element\&. "
 .ti -1c
-.RI "#define \fBcstack_shrink\fP(st)       \fBcstack_alloc\fP(st, \fBcstack_size\fP(st))"
+.RI "#define \fBcstack_shrink\fP(st)"
 .br
 .RI "For internal use, shrink capacity to fit its size\&. "
 .ti -1c
@@ -169,8 +169,14 @@ void
 .RE
 .PP
 
-.SS "#define cstack_grow(st)       \fBcstack_alloc\fP(st, \fBcstack_capacity\fP(st) + 1)"
-
+.SS "#define cstack_grow(st)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                       \
+        cstack_alloc(st, cstack_capacity(st) + 1)                              \
+    } while (0)
+.fi
 .PP
 For internal use, ensures that the stack is enough room for new element\&. 
 .PP
@@ -304,8 +310,14 @@ void
 .RE
 .PP
 
-.SS "#define cstack_shrink(st)       \fBcstack_alloc\fP(st, \fBcstack_size\fP(st))"
-
+.SS "#define cstack_shrink(st)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                       \
+        cstack_alloc(st, cstack_size(st))                                      \
+    } while (0)
+.fi
 .PP
 For internal use, shrink capacity to fit its size\&. 
 .PP

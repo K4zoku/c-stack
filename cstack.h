@@ -152,7 +152,9 @@
  * @return void
  */
 #define cstack_grow(st)                                                        \
-    cstack_alloc(st, cstack_capacity(st) + 1)
+    do {                                                                       \
+        cstack_alloc(st, cstack_capacity(st) + 1)                              \
+    } while (0)
 
 /**
  * @brief For internal use, shrink capacity to fit its size.
@@ -160,7 +162,9 @@
  * @return void
  */
 #define cstack_shrink(st)                                                      \
-    cstack_alloc(st, cstack_size(st))
+    do {                                                                       \
+        cstack_alloc(st, cstack_size(st))                                      \
+    } while (0)
 
 #endif /* CSTACK_LOGARITHMIC_GROWTH */
 

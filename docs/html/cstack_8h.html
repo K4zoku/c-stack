@@ -108,10 +108,10 @@ Macros</h2></td></tr>
 <tr class="memitem:af83eeb033a5115a61106297ef9fc5b88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cstack_8h.html#af83eeb033a5115a61106297ef9fc5b88">cstack_set_capacity</a>(st,  size)</td></tr>
 <tr class="memdesc:af83eeb033a5115a61106297ef9fc5b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">For internal use, sets the capacity variable of the stack.  <a href="cstack_8h.html#af83eeb033a5115a61106297ef9fc5b88">More...</a><br /></td></tr>
 <tr class="separator:af83eeb033a5115a61106297ef9fc5b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acebbdafbe3365aff4b2e05d7476dbd04"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cstack_8h.html#acebbdafbe3365aff4b2e05d7476dbd04">cstack_grow</a>(st)&#160;&#160;&#160;    <a class="el" href="cstack_8h.html#af418a27ec84a9e197125aa5422f88375">cstack_alloc</a>(st, <a class="el" href="cstack_8h.html#aa8778e71ba97fc089911c95cc44074e3">cstack_capacity</a>(st) + 1)</td></tr>
+<tr class="memitem:acebbdafbe3365aff4b2e05d7476dbd04"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cstack_8h.html#acebbdafbe3365aff4b2e05d7476dbd04">cstack_grow</a>(st)</td></tr>
 <tr class="memdesc:acebbdafbe3365aff4b2e05d7476dbd04"><td class="mdescLeft">&#160;</td><td class="mdescRight">For internal use, ensures that the stack is enough room for new element.  <a href="cstack_8h.html#acebbdafbe3365aff4b2e05d7476dbd04">More...</a><br /></td></tr>
 <tr class="separator:acebbdafbe3365aff4b2e05d7476dbd04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a690281fc329fee92bff53b3adb007176"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cstack_8h.html#a690281fc329fee92bff53b3adb007176">cstack_shrink</a>(st)&#160;&#160;&#160;    <a class="el" href="cstack_8h.html#af418a27ec84a9e197125aa5422f88375">cstack_alloc</a>(st, <a class="el" href="cstack_8h.html#a1e98a115848e103767a683a34848e3cd">cstack_size</a>(st))</td></tr>
+<tr class="memitem:a690281fc329fee92bff53b3adb007176"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cstack_8h.html#a690281fc329fee92bff53b3adb007176">cstack_shrink</a>(st)</td></tr>
 <tr class="memdesc:a690281fc329fee92bff53b3adb007176"><td class="mdescLeft">&#160;</td><td class="mdescRight">For internal use, shrink capacity to fit its size.  <a href="cstack_8h.html#a690281fc329fee92bff53b3adb007176">More...</a><br /></td></tr>
 <tr class="separator:a690281fc329fee92bff53b3adb007176"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af418a27ec84a9e197125aa5422f88375"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cstack_8h.html#af418a27ec84a9e197125aa5422f88375">cstack_alloc</a>(st,  count)</td></tr>
@@ -273,11 +273,15 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">st</td><td>)</td>
-          <td>&#160;&#160;&#160;    <a class="el" href="cstack_8h.html#af418a27ec84a9e197125aa5422f88375">cstack_alloc</a>(st, <a class="el" href="cstack_8h.html#aa8778e71ba97fc089911c95cc44074e3">cstack_capacity</a>(st) + 1)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                       \</div>
+<div class="line">        cstack_alloc(st, <a class="code hl_define" href="cstack_8h.html#aa8778e71ba97fc089911c95cc44074e3">cstack_capacity</a>(st) + 1)                              \</div>
+<div class="line">    } <span class="keywordflow">while</span> (0)</div>
+<div class="ttc" id="acstack_8h_html_aa8778e71ba97fc089911c95cc44074e3"><div class="ttname"><a href="cstack_8h.html#aa8778e71ba97fc089911c95cc44074e3">cstack_capacity</a></div><div class="ttdeci">#define cstack_capacity(st)</div><div class="ttdoc">For internal use, gets the current capacity of the stack.</div><div class="ttdef"><b>Definition:</b> cstack.h:103</div></div>
+</div><!-- fragment -->
 <p>For internal use, ensures that the stack is enough room for new element. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -379,7 +383,6 @@ Macros</h2></td></tr>
 <div class="line">        st[st_size] = (value);                                                 \</div>
 <div class="line">        cstack_set_size((st), st_size + 1);                                    \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
-<div class="ttc" id="acstack_8h_html_aa8778e71ba97fc089911c95cc44074e3"><div class="ttname"><a href="cstack_8h.html#aa8778e71ba97fc089911c95cc44074e3">cstack_capacity</a></div><div class="ttdeci">#define cstack_capacity(st)</div><div class="ttdoc">For internal use, gets the current capacity of the stack.</div><div class="ttdef"><b>Definition:</b> cstack.h:103</div></div>
 </div><!-- fragment -->
 <p>Insert element. </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -490,11 +493,14 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">st</td><td>)</td>
-          <td>&#160;&#160;&#160;    <a class="el" href="cstack_8h.html#af418a27ec84a9e197125aa5422f88375">cstack_alloc</a>(st, <a class="el" href="cstack_8h.html#a1e98a115848e103767a683a34848e3cd">cstack_size</a>(st))</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                       \</div>
+<div class="line">        cstack_alloc(st, <a class="code hl_define" href="cstack_8h.html#a1e98a115848e103767a683a34848e3cd">cstack_size</a>(st))                                      \</div>
+<div class="line">    } <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
 <p>For internal use, shrink capacity to fit its size. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
