@@ -1,0 +1,361 @@
+.TH "cstack.h" 3 "Tue Jan 4 2022" "Version 1.0.0" "CStack" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cstack.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBcstack_type\fP(type)   type *"
+.br
+.RI "The stack type used in this library\&. "
+.ti -1c
+.RI "#define \fBcstack_new\fP()   NULL"
+.br
+.RI "Construct new stack\&. "
+.ti -1c
+.RI "#define \fBcstack_empty\fP(st)     (\fBcstack_size\fP(st) == 0)"
+.br
+.RI "Test whether container is empty\&. "
+.ti -1c
+.RI "#define \fBcstack_size\fP(st)       ((st) ? ((size_t *) (st))[\-2] : (size_t) 0)"
+.br
+.RI "Return size\&. "
+.ti -1c
+.RI "#define \fBcstack_top\fP(st)       (st)[\fBcstack_size\fP(st) \- 1]"
+.br
+.RI "Access next element\&. "
+.ti -1c
+.RI "#define \fBcstack_push\fP(st,  value)"
+.br
+.RI "Insert element\&. "
+.ti -1c
+.RI "#define \fBcstack_pop\fP(st)"
+.br
+.RI "Remove top element\&. "
+.ti -1c
+.RI "#define \fBcstack_free\fP(st)"
+.br
+.RI "Frees all memory associated with the stack\&. "
+.ti -1c
+.RI "#define \fBcstack_set_size\fP(st,  size)"
+.br
+.RI "For internal use, sets the size variable of the stack\&. "
+.ti -1c
+.RI "#define \fBcstack_capacity\fP(st)       ((st) ? ((size_t *) (st))[\-1] : (size_t) 0)"
+.br
+.RI "For internal use, gets the current capacity of the stack\&. "
+.ti -1c
+.RI "#define \fBcstack_set_capacity\fP(st,  size)"
+.br
+.RI "For internal use, sets the capacity variable of the stack\&. "
+.ti -1c
+.RI "#define \fBcstack_grow\fP(st)       \fBcstack_alloc\fP(st, \fBcstack_capacity\fP(st) + 1)"
+.br
+.RI "For internal use, ensures that the stack is enough room for new element\&. "
+.ti -1c
+.RI "#define \fBcstack_shrink\fP(st)       \fBcstack_alloc\fP(st, \fBcstack_size\fP(st))"
+.br
+.RI "For internal use, shrink capacity to fit its size\&. "
+.ti -1c
+.RI "#define \fBcstack_alloc\fP(st,  count)"
+.br
+.RI "For internal use, allocate memory for 2 internal elements and <count> elements\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define cstack_alloc(st, count)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                                                               \
+        size_t st_size = 2 * sizeof(size_t);                                                                           \
+        if (count) {                                                                                                   \
+            st_size += (count) * sizeof(*(st));                                                                        \
+        }                                                                                                              \
+        if (st) {                                                                                                      \
+            size_t * st_ptr = ((size_t *) (st)) - 2;                                                                   \
+            size_t * st_new_ptr = realloc(st_ptr, st_size);                                                            \
+            assert(st_new_ptr);                                                                                        \
+            (st) = (void *) (st_new_ptr + 2);                                                                          \
+            cstack_set_capacity((st), (count));                                                                        \
+        } else {                                                                                                       \
+            size_t * st_ptr = malloc(st_size);                                                                         \
+            assert(st_ptr);                                                                                            \
+            (st) = (void *) (st_ptr + 2);                                                                              \
+            cstack_set_capacity((st), (count));                                                                        \
+            cstack_set_size((st), 0);                                                                                  \
+        }                                                                                                              \
+    } while (0)
+.fi
+.PP
+For internal use, allocate memory for 2 internal elements and <count> elements\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.br
+\fIcount\fP - The number of elements that need to be allocated 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "#define cstack_capacity(st)       ((st) ? ((size_t *) (st))[\-1] : (size_t) 0)"
+
+.PP
+For internal use, gets the current capacity of the stack\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+size_t - The capacity 
+.RE
+.PP
+
+.SS "#define cstack_empty(st)     (\fBcstack_size\fP(st) == 0)"
+
+.PP
+Test whether container is empty\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int - 1 if empty, otherwise 0 
+.RE
+.PP
+
+.SS "#define cstack_free(st)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                                                               \
+        if (st) {                                                                                                      \
+            free(((size_t *) (st)) - 2);                                                                               \
+        }                                                                                                              \
+    } while (0)
+.fi
+.PP
+Frees all memory associated with the stack\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "#define cstack_grow(st)       \fBcstack_alloc\fP(st, \fBcstack_capacity\fP(st) + 1)"
+
+.PP
+For internal use, ensures that the stack is enough room for new element\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "#define cstack_new()   NULL"
+
+.PP
+Construct new stack\&. 
+.PP
+\fBReturns\fP
+.RS 4
+stack 
+.RE
+.PP
+
+.SS "#define cstack_pop(st)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                                                               \
+        if (cstack_empty(st)) {                                                                                        \
+            break;                                                                                                     \
+        }                                                                                                              \
+        cstack_set_size(st, cstack_size(st) - 1);                                                                      \
+        cstack_shrink(st);                                                                                             \
+    } while (0)
+.fi
+.PP
+Remove top element\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "#define cstack_push(st, value)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                                                               \
+        const size_t st_cap = cstack_capacity(st);                                                                     \
+        const size_t st_size = cstack_size(st);                                                                        \
+        if (st_cap <= st_size) {                                                                                       \
+            cstack_grow(st);                                                                                           \
+        }                                                                                                              \
+        st[st_size] = (value);                                                                                         \
+        cstack_set_size((st), st_size + 1);                                                                            \
+    } while (0)
+.fi
+.PP
+Insert element\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.br
+\fIvalue\fP - Value to which the inserted element is initialized\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "#define cstack_set_capacity(st, size)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                                                               \
+        if (st) {                                                                                                      \
+            ((size_t *) (st))[-1] = (size);                                                                            \
+        }                                                                                                              \
+    } while (0)
+.fi
+.PP
+For internal use, sets the capacity variable of the stack\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.br
+\fIsize\fP - The new capacity to set 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "#define cstack_set_size(st, size)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                                                               \
+        if (st) {                                                                                                      \
+            ((size_t *) (st))[-2] = (size);                                                                            \
+        }                                                                                                              \
+    } while (0)
+.fi
+.PP
+For internal use, sets the size variable of the stack\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.br
+\fIsize\fP - The new capacity to set 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "#define cstack_shrink(st)       \fBcstack_alloc\fP(st, \fBcstack_size\fP(st))"
+
+.PP
+For internal use, shrink capacity to fit its size\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.SS "#define cstack_size(st)       ((st) ? ((size_t *) (st))[\-2] : (size_t) 0)"
+
+.PP
+Return size\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+size_t - Return size of the stack 
+.RE
+.PP
+
+.SS "#define cstack_top(st)       (st)[\fBcstack_size\fP(st) \- 1]"
+
+.PP
+Access next element\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP - The stack 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+type - Returns a reference to the top element in the stack 
+.RE
+.PP
+
+.SS "#define cstack_type(type)   type *"
+
+.PP
+The stack type used in this library\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for CStack from the source code\&.

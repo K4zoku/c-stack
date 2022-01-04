@@ -14,3 +14,6 @@ memcheck: cstack-test
 
 cstack-test:
 	$(CC) $(CFLAGS) test.c -o cstack-test
+
+docs:
+	doxygen doxygen.conf
