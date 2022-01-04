@@ -10,6 +10,8 @@ cstack.h
 .br
 \fC#include <stdlib\&.h>\fP
 .br
+\fC#include <string\&.h>\fP
+.br
 
 .SS "Macros"
 
@@ -46,6 +48,10 @@ cstack.h
 .RI "#define \fBcstack_free\fP(st)"
 .br
 .RI "Frees all memory associated with the stack\&. "
+.ti -1c
+.RI "#define \fBcstack_cpy\fP(dest,  src)"
+.br
+.RI "Clone stack\&. "
 .ti -1c
 .RI "#define \fBcstack_set_size\fP(st,  size)"
 .br
@@ -126,6 +132,37 @@ For internal use, gets the current capacity of the stack\&.
 \fBReturns\fP
 .RS 4
 size_t - The capacity 
+.RE
+.PP
+
+.SS "#define cstack_cpy(dest, src)"
+\fBValue:\fP
+.PP
+.nf
+    do {                                                                       \
+        if (src) {                                                             \
+            const size_t st_size = cstack_size(src);                           \
+            cstack_alloc(dest, st_size);                                       \
+            memcpy(dest, src, st_size * sizeof(*(src)));                       \
+            cstack_set_size(dest, st_size);                                    \
+        } else {                                                               \
+            dest = cstack_new();                                               \
+        }                                                                      \
+    } while (0)
+.fi
+.PP
+Clone stack\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdest\fP - Destination 
+.br
+\fIsrc\fP - Source 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
 .RE
 .PP
 

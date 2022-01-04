@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * @brief The stack type used in this library.
@@ -79,6 +80,25 @@
     do {                                                                       \
         if (st) {                                                              \
             free(((size_t *) (st)) - 2);                                       \
+        }                                                                      \
+    } while (0)
+
+
+/**
+ * @brief Clone stack
+ * @param dest - Destination
+ * @param src - Source
+ * @return void
+ */
+#define cstack_cpy(dest, src)                                                  \
+    do {                                                                       \
+        if (src) {                                                             \
+            const size_t st_size = cstack_size(src);                           \
+            cstack_alloc(dest, st_size);                                       \
+            memcpy(dest, src, st_size * sizeof(*(src)));                       \
+            cstack_set_size(dest, st_size);                                    \
+        } else {                                                               \
+            dest = cstack_new();                                               \
         }                                                                      \
     } while (0)
 
