@@ -119,8 +119,8 @@
 #ifdef CSTACK_LOGARITHMIC_GROWTH
 
 /**
- * @brief For internal use, ensures that the stack is enough room
- * for new element.
+ * @brief For internal use, ensures that the stack is enough room for new
+ * element.
  * @param st - The stack
  * @return void
  */
@@ -147,7 +147,8 @@
 #else
 
 /**
- * @brief For internal use, ensures that the stack is enough room for new element.
+ * @brief For internal use, ensures that the stack is enough room for new
+ * element.
  * @param st - The stack
  * @return void
  */
