@@ -144,24 +144,24 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                                                               \</div>
-<div class="line">        size_t st_size = 2 * <span class="keyword">sizeof</span>(size_t);                                                                           \</div>
-<div class="line">        if (count) {                                                                                                   \</div>
-<div class="line">            st_size += (count) * <span class="keyword">sizeof</span>(*(st));                                                                        \</div>
-<div class="line">        }                                                                                                              \</div>
-<div class="line">        if (st) {                                                                                                      \</div>
-<div class="line">            size_t * st_ptr = ((<span class="keywordtype">size_t</span> *) (st)) - 2;                                                                   \</div>
-<div class="line">            size_t * st_new_ptr = realloc(st_ptr, st_size);                                                            \</div>
-<div class="line">            assert(st_new_ptr);                                                                                        \</div>
-<div class="line">            (st) = (<span class="keywordtype">void</span> *) (st_new_ptr + 2);                                                                          \</div>
-<div class="line">            cstack_set_capacity((st), (count));                                                                        \</div>
-<div class="line">        } <span class="keywordflow">else</span> {                                                                                                       \</div>
-<div class="line">            size_t * st_ptr = malloc(st_size);                                                                         \</div>
-<div class="line">            assert(st_ptr);                                                                                            \</div>
-<div class="line">            (st) = (<span class="keywordtype">void</span> *) (st_ptr + 2);                                                                              \</div>
-<div class="line">            cstack_set_capacity((st), (count));                                                                        \</div>
-<div class="line">            cstack_set_size((st), 0);                                                                                  \</div>
-<div class="line">        }                                                                                                              \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                       \</div>
+<div class="line">        size_t st_size = 2 * <span class="keyword">sizeof</span>(size_t);                                   \</div>
+<div class="line">        if (count) {                                                           \</div>
+<div class="line">            st_size += (count) * <span class="keyword">sizeof</span>(*(st));                                \</div>
+<div class="line">        }                                                                      \</div>
+<div class="line">        if (st) {                                                              \</div>
+<div class="line">            size_t * st_ptr = ((<span class="keywordtype">size_t</span> *) (st)) - 2;                           \</div>
+<div class="line">            size_t * st_new_ptr = realloc(st_ptr, st_size);                    \</div>
+<div class="line">            assert(st_new_ptr);                                                \</div>
+<div class="line">            (st) = (<span class="keywordtype">void</span> *) (st_new_ptr + 2);                                  \</div>
+<div class="line">            cstack_set_capacity((st), (count));                                \</div>
+<div class="line">        } <span class="keywordflow">else</span> {                                                               \</div>
+<div class="line">            size_t * st_ptr = malloc(st_size);                                 \</div>
+<div class="line">            assert(st_ptr);                                                    \</div>
+<div class="line">            (st) = (<span class="keywordtype">void</span> *) (st_ptr + 2);                                      \</div>
+<div class="line">            cstack_set_capacity((st), (count));                                \</div>
+<div class="line">            cstack_set_size((st), 0);                                          \</div>
+<div class="line">        }                                                                      \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
 <p>For internal use, allocate memory for 2 internal elements and &lt;count&gt; elements. </p>
@@ -245,10 +245,10 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                                                               \</div>
-<div class="line">        if (st) {                                                                                                      \</div>
-<div class="line">            free(((<span class="keywordtype">size_t</span> *) (st)) - 2);                                                                               \</div>
-<div class="line">        }                                                                                                              \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                       \</div>
+<div class="line">        if (st) {                                                              \</div>
+<div class="line">            free(((<span class="keywordtype">size_t</span> *) (st)) - 2);                                       \</div>
+<div class="line">        }                                                                      \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
 <p>Frees all memory associated with the stack. </p>
@@ -324,12 +324,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                                                               \</div>
-<div class="line">        if (<a class="code hl_define" href="cstack_8h.html#a092ddeecfaaaa92c0aaf34aa264488cf">cstack_empty</a>(st)) {                                                                                        \</div>
-<div class="line">            break;                                                                                                     \</div>
-<div class="line">        }                                                                                                              \</div>
-<div class="line">        cstack_set_size(st, <a class="code hl_define" href="cstack_8h.html#a1e98a115848e103767a683a34848e3cd">cstack_size</a>(st) - 1);                                                                      \</div>
-<div class="line">        cstack_shrink(st);                                                                                             \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                       \</div>
+<div class="line">        if (<a class="code hl_define" href="cstack_8h.html#a092ddeecfaaaa92c0aaf34aa264488cf">cstack_empty</a>(st)) {                                                \</div>
+<div class="line">            break;                                                             \</div>
+<div class="line">        }                                                                      \</div>
+<div class="line">        cstack_set_size(st, <a class="code hl_define" href="cstack_8h.html#a1e98a115848e103767a683a34848e3cd">cstack_size</a>(st) - 1);                              \</div>
+<div class="line">        cstack_shrink(st);                                                     \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 <div class="ttc" id="acstack_8h_html_a092ddeecfaaaa92c0aaf34aa264488cf"><div class="ttname"><a href="cstack_8h.html#a092ddeecfaaaa92c0aaf34aa264488cf">cstack_empty</a></div><div class="ttdeci">#define cstack_empty(st)</div><div class="ttdoc">Test whether container is empty.</div><div class="ttdef"><b>Definition:</b> cstack.h:23</div></div>
 <div class="ttc" id="acstack_8h_html_a1e98a115848e103767a683a34848e3cd"><div class="ttname"><a href="cstack_8h.html#a1e98a115848e103767a683a34848e3cd">cstack_size</a></div><div class="ttdeci">#define cstack_size(st)</div><div class="ttdoc">Return size.</div><div class="ttdef"><b>Definition:</b> cstack.h:31</div></div>
@@ -370,14 +370,14 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                                                               \</div>
-<div class="line">        const <span class="keywordtype">size_t</span> st_cap = <a class="code hl_define" href="cstack_8h.html#aa8778e71ba97fc089911c95cc44074e3">cstack_capacity</a>(st);                                                                     \</div>
-<div class="line">        const <span class="keywordtype">size_t</span> st_size = <a class="code hl_define" href="cstack_8h.html#a1e98a115848e103767a683a34848e3cd">cstack_size</a>(st);                                                                        \</div>
-<div class="line">        if (st_cap &lt;= st_size) {                                                                                       \</div>
-<div class="line">            cstack_grow(st);                                                                                           \</div>
-<div class="line">        }                                                                                                              \</div>
-<div class="line">        st[st_size] = (value);                                                                                         \</div>
-<div class="line">        cstack_set_size((st), st_size + 1);                                                                            \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                       \</div>
+<div class="line">        const <span class="keywordtype">size_t</span> st_cap = <a class="code hl_define" href="cstack_8h.html#aa8778e71ba97fc089911c95cc44074e3">cstack_capacity</a>(st);                             \</div>
+<div class="line">        const <span class="keywordtype">size_t</span> st_size = <a class="code hl_define" href="cstack_8h.html#a1e98a115848e103767a683a34848e3cd">cstack_size</a>(st);                                \</div>
+<div class="line">        if (st_cap &lt;= st_size) {                                               \</div>
+<div class="line">            cstack_grow(st);                                                   \</div>
+<div class="line">        }                                                                      \</div>
+<div class="line">        st[st_size] = (value);                                                 \</div>
+<div class="line">        cstack_set_size((st), st_size + 1);                                    \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 <div class="ttc" id="acstack_8h_html_aa8778e71ba97fc089911c95cc44074e3"><div class="ttname"><a href="cstack_8h.html#aa8778e71ba97fc089911c95cc44074e3">cstack_capacity</a></div><div class="ttdeci">#define cstack_capacity(st)</div><div class="ttdoc">For internal use, gets the current capacity of the stack.</div><div class="ttdef"><b>Definition:</b> cstack.h:103</div></div>
 </div><!-- fragment -->
@@ -418,10 +418,10 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                                                               \</div>
-<div class="line">        if (st) {                                                                                                      \</div>
-<div class="line">            ((<span class="keywordtype">size_t</span> *) (st))[-1] = (size);                                                                            \</div>
-<div class="line">        }                                                                                                              \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                       \</div>
+<div class="line">        if (st) {                                                              \</div>
+<div class="line">            ((<span class="keywordtype">size_t</span> *) (st))[-1] = (size);                                    \</div>
+<div class="line">        }                                                                      \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
 <p>For internal use, sets the capacity variable of the stack. </p>
@@ -461,10 +461,10 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                                                               \</div>
-<div class="line">        if (st) {                                                                                                      \</div>
-<div class="line">            ((<span class="keywordtype">size_t</span> *) (st))[-2] = (size);                                                                            \</div>
-<div class="line">        }                                                                                                              \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                       \</div>
+<div class="line">        if (st) {                                                              \</div>
+<div class="line">            ((<span class="keywordtype">size_t</span> *) (st))[-2] = (size);                                    \</div>
+<div class="line">        }                                                                      \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
 <p>For internal use, sets the size variable of the stack. </p>

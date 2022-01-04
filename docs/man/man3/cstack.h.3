@@ -77,24 +77,24 @@ cstack.h
 \fBValue:\fP
 .PP
 .nf
-    do {                                                                                                               \
-        size_t st_size = 2 * sizeof(size_t);                                                                           \
-        if (count) {                                                                                                   \
-            st_size += (count) * sizeof(*(st));                                                                        \
-        }                                                                                                              \
-        if (st) {                                                                                                      \
-            size_t * st_ptr = ((size_t *) (st)) - 2;                                                                   \
-            size_t * st_new_ptr = realloc(st_ptr, st_size);                                                            \
-            assert(st_new_ptr);                                                                                        \
-            (st) = (void *) (st_new_ptr + 2);                                                                          \
-            cstack_set_capacity((st), (count));                                                                        \
-        } else {                                                                                                       \
-            size_t * st_ptr = malloc(st_size);                                                                         \
-            assert(st_ptr);                                                                                            \
-            (st) = (void *) (st_ptr + 2);                                                                              \
-            cstack_set_capacity((st), (count));                                                                        \
-            cstack_set_size((st), 0);                                                                                  \
-        }                                                                                                              \
+    do {                                                                       \
+        size_t st_size = 2 * sizeof(size_t);                                   \
+        if (count) {                                                           \
+            st_size += (count) * sizeof(*(st));                                \
+        }                                                                      \
+        if (st) {                                                              \
+            size_t * st_ptr = ((size_t *) (st)) - 2;                           \
+            size_t * st_new_ptr = realloc(st_ptr, st_size);                    \
+            assert(st_new_ptr);                                                \
+            (st) = (void *) (st_new_ptr + 2);                                  \
+            cstack_set_capacity((st), (count));                                \
+        } else {                                                               \
+            size_t * st_ptr = malloc(st_size);                                 \
+            assert(st_ptr);                                                    \
+            (st) = (void *) (st_ptr + 2);                                      \
+            cstack_set_capacity((st), (count));                                \
+            cstack_set_size((st), 0);                                          \
+        }                                                                      \
     } while (0)
 .fi
 .PP
@@ -149,10 +149,10 @@ int - 1 if empty, otherwise 0
 \fBValue:\fP
 .PP
 .nf
-    do {                                                                                                               \
-        if (st) {                                                                                                      \
-            free(((size_t *) (st)) - 2);                                                                               \
-        }                                                                                                              \
+    do {                                                                       \
+        if (st) {                                                              \
+            free(((size_t *) (st)) - 2);                                       \
+        }                                                                      \
     } while (0)
 .fi
 .PP
@@ -200,12 +200,12 @@ stack
 \fBValue:\fP
 .PP
 .nf
-    do {                                                                                                               \
-        if (cstack_empty(st)) {                                                                                        \
-            break;                                                                                                     \
-        }                                                                                                              \
-        cstack_set_size(st, cstack_size(st) - 1);                                                                      \
-        cstack_shrink(st);                                                                                             \
+    do {                                                                       \
+        if (cstack_empty(st)) {                                                \
+            break;                                                             \
+        }                                                                      \
+        cstack_set_size(st, cstack_size(st) - 1);                              \
+        cstack_shrink(st);                                                     \
     } while (0)
 .fi
 .PP
@@ -226,14 +226,14 @@ void
 \fBValue:\fP
 .PP
 .nf
-    do {                                                                                                               \
-        const size_t st_cap = cstack_capacity(st);                                                                     \
-        const size_t st_size = cstack_size(st);                                                                        \
-        if (st_cap <= st_size) {                                                                                       \
-            cstack_grow(st);                                                                                           \
-        }                                                                                                              \
-        st[st_size] = (value);                                                                                         \
-        cstack_set_size((st), st_size + 1);                                                                            \
+    do {                                                                       \
+        const size_t st_cap = cstack_capacity(st);                             \
+        const size_t st_size = cstack_size(st);                                \
+        if (st_cap <= st_size) {                                               \
+            cstack_grow(st);                                                   \
+        }                                                                      \
+        st[st_size] = (value);                                                 \
+        cstack_set_size((st), st_size + 1);                                    \
     } while (0)
 .fi
 .PP
@@ -256,10 +256,10 @@ void
 \fBValue:\fP
 .PP
 .nf
-    do {                                                                                                               \
-        if (st) {                                                                                                      \
-            ((size_t *) (st))[-1] = (size);                                                                            \
-        }                                                                                                              \
+    do {                                                                       \
+        if (st) {                                                              \
+            ((size_t *) (st))[-1] = (size);                                    \
+        }                                                                      \
     } while (0)
 .fi
 .PP
@@ -282,10 +282,10 @@ void
 \fBValue:\fP
 .PP
 .nf
-    do {                                                                                                               \
-        if (st) {                                                                                                      \
-            ((size_t *) (st))[-2] = (size);                                                                            \
-        }                                                                                                              \
+    do {                                                                       \
+        if (st) {                                                              \
+            ((size_t *) (st))[-2] = (size);                                    \
+        }                                                                      \
     } while (0)
 .fi
 .PP
