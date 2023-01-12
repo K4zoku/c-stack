@@ -1,7 +1,7 @@
 <h1 align="center"><code>c-stack</code></h1>
 <p align="center">
     <a href="https://github.com/K4zoku/c-stack/actions/workflows/make.yml">
-        <img alt="Workflow Status" src="https://img.shields.io/github/workflow/status/K4zoku/c-stack/Make?style=for-the-badge">
+        <img alt="Workflow Status" src="https://img.shields.io/github/actions/workflow/status/K4zoku/c-stack/make.yml?style=for-the-badge">
     </a>
     <a href="LICENSE">
         <img alt="License" src="https://img.shields.io/github/license/K4zoku/c-stack?style=for-the-badge">
